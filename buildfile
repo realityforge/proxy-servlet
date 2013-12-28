@@ -11,8 +11,14 @@ define 'proxy-servlet' do
 
   project.version = ENV['PRODUCT_VERSION'] if ENV['PRODUCT_VERSION']
 
+  pom.add_apache2_license
+  pom.add_github_project('realityforge/proxy-servlet')
+  pom.add_developer('realityforge', 'Peter Donald')
+  pom.provided_dependencies.concat [:javax_servlet]
+
   compile.with HTTP_CLIENT_JARS, :javax_servlet
 
   package(:jar)
   package(:sources)
+  package(:javadoc)
 end
