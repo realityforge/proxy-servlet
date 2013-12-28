@@ -10,19 +10,21 @@ Usage
 
 A simple proxy that forwards to a url configured in JNDI.
 
-      @WebServlet( urlPatterns = { "/myservice/*" }, loadOnStartup = 1 )
-      public class MyServiceProxyServlet
-        extends AbstractProxyServlet
-      {
-        @Resource( name = "myservice/endpoint", mappedName = "myservice/endpoint" )
-        private String _proxyURL;
+```java
+@WebServlet( urlPatterns = { "/myservice/*" }, loadOnStartup = 1 )
+public class MyServiceProxyServlet
+  extends AbstractProxyServlet
+{
+  @Resource( name = "myservice/endpoint", mappedName = "myservice/endpoint" )
+  private String _proxyURL;
 
-        @Override
-        protected String getProxyURL()
-        {
-          return _proxyURL;
-        }
-      }
+  @Override
+  protected String getProxyURL()
+  {
+    return _proxyURL;
+  }
+}
+```
 
 
 Credit
