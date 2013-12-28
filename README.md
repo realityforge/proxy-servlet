@@ -8,6 +8,16 @@ The proxy-servlet provides a base class to make it easy to create proxy servlets
 Usage
 -----
 
+Download the jar from maven central. This can be done by adding a Maven dependency such as;
+
+```xml
+<dependency>
+   <groupId>org.realityforge.proxy-servlet</groupId>
+   <artifactId>proxy-servlet</artifactId>
+   <version>0.2.0</version>
+</dependency>
+```
+
 A simple proxy that forwards to a url configured in JNDI.
 
 ```java
