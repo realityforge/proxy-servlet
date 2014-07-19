@@ -1,3 +1,5 @@
+require 'buildr/custom_pom'
+require 'buildr/gpg'
 require 'buildr/git_auto_version'
 
 HTTP_CLIENT_JARS = [:httpclient, :httpcore, :commons_codec, :commons_logging]
