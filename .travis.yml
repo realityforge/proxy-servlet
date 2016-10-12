@@ -1,6 +1,7 @@
 language: java
 jdk:
   - oraclejdk7
+sudo: false
 install:
   - gem install bundler
   - bundle install
