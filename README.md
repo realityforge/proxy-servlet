@@ -25,7 +25,7 @@ A simple proxy that forwards to a url configured in JNDI.
 public class MyServiceProxyServlet
   extends AbstractProxyServlet
 {
-  @Resource( name = "myservice/endpoint", mappedName = "myservice/endpoint" )
+  @Resource( lookup = "myservice/endpoint" )
   private String _proxyURL;
 
   @Override
