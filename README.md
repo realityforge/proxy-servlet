@@ -1,7 +1,7 @@
 Proxy-Servlet
 =============
 
-[![Build Status](https://secure.travis-ci.org/realityforge/proxy-servlet.svg?branch=master)](http://travis-ci.org/realityforge/proxy-servlet)
+[![Build Status](https://api.travis-ci.com/realityforge/proxy-servlet.svg?branch=master)](http://travis-ci.org/realityforge/proxy-servlet)
 
 The proxy-servlet provides a base class to make it easy to create proxy servlets.
 
