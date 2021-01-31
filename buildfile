@@ -22,5 +22,7 @@ define 'proxy-servlet' do
   package(:jar)
   package(:sources)
   package(:javadoc)
+  iml.excluded_directories << project._('tmp')
+
   ipr.add_component_from_artifact(:idea_codestyle)
 end
