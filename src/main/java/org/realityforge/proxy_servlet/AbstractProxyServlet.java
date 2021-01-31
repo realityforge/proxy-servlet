@@ -366,6 +366,17 @@ public abstract class AbstractProxyServlet
       {
         entity.writeTo( servletOutputStream );
       }
+      catch ( final IOException ioe )
+      {
+        // Glassfish 5.19x and earlier does not guard against writing to closed connections
+        // and thus can periodically produce this error which we have decided to just consume
+        // so it does not appear in the logs
+        if ( !"Connection is closed".equals( ioe.getMessage() ) )
+        {
+          ioe.fillInStackTrace();
+          throw ioe;
+        }
+      }
       finally
       {
         closeQuietly( servletOutputStream );
