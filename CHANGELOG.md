@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Upgrade the minimum JVM version to 1.8.
+
 ### [v0.2.0](https://github.com/realityforge/proxy-servlet/tree/v0.2.0) (2013-12-28) · [Full Changelog](https://github.com/realityforge/proxy-servlet/compare/v0.1.0...v0.2.0)
 
 * Rework the build to be Maven Central compliant and publish to Maven Central.
