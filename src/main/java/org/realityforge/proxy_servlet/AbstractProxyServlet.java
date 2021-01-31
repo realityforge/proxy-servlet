@@ -361,7 +361,7 @@ public abstract class AbstractProxyServlet
     final HttpEntity entity = proxyResponse.getEntity();
     if ( entity != null )
     {
-      OutputStream servletOutputStream = servletResponse.getOutputStream();
+      final OutputStream servletOutputStream = servletResponse.getOutputStream();
       try
       {
         entity.writeTo( servletOutputStream );
