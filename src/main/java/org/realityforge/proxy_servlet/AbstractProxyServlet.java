@@ -24,6 +24,7 @@ import java.util.Enumeration;
 import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Nonnull;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +55,7 @@ import org.apache.http.util.EntityUtils;
 public abstract class AbstractProxyServlet
   extends HttpServlet
 {
+  @Nonnull
   public static final String X_FORWARDED_FOR_HEADER = "X-Forwarded-For";
   /**
    * These are the "hop-by-hop" headers that should not be copied.
@@ -61,8 +63,11 @@ public abstract class AbstractProxyServlet
    * I use an HttpClient HeaderGroup class instead of Set<String> because this
    * approach does case insensitive lookup faster.
    */
+  @Nonnull
   private static final HeaderGroup HOP_BY_HOP_HEADERS;
+  @Nonnull
   private static final BitSet ASCII_QUERY_CHARS;
+  @Nonnull
   private static final Logger LOG = Logger.getLogger( AbstractProxyServlet.class.getName() );
   public static final int MAX_ASCII_VALUE = 128;
   private URI _targetUri;
@@ -70,7 +75,7 @@ public abstract class AbstractProxyServlet
   private CloseableHttpClient _client;
 
   @Override
-  public void init( final ServletConfig servletConfig )
+  public void init( @Nonnull final ServletConfig servletConfig )
     throws ServletException
   {
     super.init( servletConfig );
@@ -91,6 +96,7 @@ public abstract class AbstractProxyServlet
     _client = HttpClientBuilder.create().disableRedirectHandling().build();
   }
 
+  @Nonnull
   protected abstract String getProxyURL();
 
   @Override
@@ -112,7 +118,8 @@ public abstract class AbstractProxyServlet
 
   @SuppressWarnings( "deprecation" )
   @Override
-  protected void service( final HttpServletRequest servletRequest, final HttpServletResponse servletResponse )
+  protected void service( @Nonnull final HttpServletRequest servletRequest,
+                          @Nonnull final HttpServletResponse servletResponse )
     throws ServletException, IOException
   {
     final String proxyRequestUri = rewriteUrlFromRequest( servletRequest );
@@ -158,7 +165,7 @@ public abstract class AbstractProxyServlet
     }
   }
 
-  private void handleError( final Exception e )
+  private void handleError( @Nonnull final Exception e )
     throws IOException, ServletException
   {
     if ( e instanceof IOException )
@@ -183,7 +190,7 @@ public abstract class AbstractProxyServlet
    * Override this to customize the proxied request.
    */
   @SuppressWarnings( "UnusedParameters" )
-  protected void proxyPrepared( final HttpRequest request )
+  protected void proxyPrepared( @Nonnull final HttpRequest request )
   {
   }
 
@@ -197,8 +204,9 @@ public abstract class AbstractProxyServlet
     return true;
   }
 
-  private HttpRequest newProxyRequest( final HttpServletRequest servletRequest,
-                                       final String proxyRequestUri )
+  @Nonnull
+  private HttpRequest newProxyRequest( @Nonnull final HttpServletRequest servletRequest,
+                                       @Nonnull final String proxyRequestUri )
     throws IOException
   {
     final String method = servletRequest.getMethod();
@@ -216,9 +224,9 @@ public abstract class AbstractProxyServlet
     }
   }
 
-  private boolean doResponseRedirectOrNotModifiedLogic( final HttpServletRequest servletRequest,
-                                                        final HttpServletResponse servletResponse,
-                                                        final HttpResponse proxyResponse,
+  private boolean doResponseRedirectOrNotModifiedLogic( @Nonnull final HttpServletRequest servletRequest,
+                                                        @Nonnull final HttpServletResponse servletResponse,
+                                                        @Nonnull final HttpResponse proxyResponse,
                                                         final int statusCode )
     throws ServletException, IOException
   {
@@ -257,7 +265,7 @@ public abstract class AbstractProxyServlet
     return false;
   }
 
-  private void closeQuietly( final Closeable closeable )
+  private void closeQuietly( @Nonnull final Closeable closeable )
   {
     try
     {
@@ -272,7 +280,8 @@ public abstract class AbstractProxyServlet
   /**
    * Copy request headers from the servlet client to the proxy request.
    */
-  private void copyRequestHeaders( final HttpServletRequest servletRequest, final HttpRequest proxyRequest )
+  private void copyRequestHeaders( @Nonnull final HttpServletRequest servletRequest,
+                                   @Nonnull final HttpRequest proxyRequest )
   {
     // Get an Enumeration of all of the header names sent by the client
     final Enumeration enumerationOfHeaderNames = servletRequest.getHeaderNames();
@@ -311,8 +320,8 @@ public abstract class AbstractProxyServlet
     }
   }
 
-  private void setXForwardedForHeader( final HttpServletRequest servletRequest,
-                                       final HttpRequest proxyRequest )
+  private void setXForwardedForHeader( @Nonnull final HttpServletRequest servletRequest,
+                                       @Nonnull final HttpRequest proxyRequest )
   {
     if ( shouldForwardIP() )
     {
@@ -329,7 +338,8 @@ public abstract class AbstractProxyServlet
   /**
    * Copy proxied response headers back to the servlet client.
    */
-  private void copyResponseHeaders( final HttpResponse proxyResponse, final HttpServletResponse servletResponse )
+  private void copyResponseHeaders( @Nonnull final HttpResponse proxyResponse,
+                                    @Nonnull final HttpServletResponse servletResponse )
   {
     for ( final Header header : proxyResponse.getAllHeaders() )
     {
@@ -344,7 +354,8 @@ public abstract class AbstractProxyServlet
   /**
    * Copy response body data (the entity) from the proxy to the servlet client.
    */
-  private void copyResponseEntity( final HttpResponse proxyResponse, final HttpServletResponse servletResponse )
+  private void copyResponseEntity( @Nonnull final HttpResponse proxyResponse,
+                                   @Nonnull final HttpServletResponse servletResponse )
     throws IOException
   {
     final HttpEntity entity = proxyResponse.getEntity();
@@ -366,7 +377,7 @@ public abstract class AbstractProxyServlet
    * Reads the request URI from {@code servletRequest} and rewrites it, considering {@link
    * #_targetUri}. It's used to make the new request.
    */
-  protected String rewriteUrlFromRequest( final HttpServletRequest servletRequest )
+  protected String rewriteUrlFromRequest( @Nonnull final HttpServletRequest servletRequest )
   {
     final StringBuilder sb = new StringBuilder( 500 );
     sb.append( _target );
@@ -394,7 +405,7 @@ public abstract class AbstractProxyServlet
    * For a redirect response from the target server, this translates {@code theUrl} to redirect to
    * and translates it to one the original client can use.
    */
-  private String rewriteUrlFromResponse( final HttpServletRequest servletRequest, final String url )
+  private String rewriteUrlFromResponse( @Nonnull final HttpServletRequest servletRequest, @Nonnull final String url )
   {
     if ( url.startsWith( _target ) )
     {
@@ -424,7 +435,7 @@ public abstract class AbstractProxyServlet
    *
    * @param in example: name=value&foo=bar#fragment
    */
-  private static CharSequence encodeUriQuery( final CharSequence in )
+  private static CharSequence encodeUriQuery( @Nonnull final CharSequence in )
   {
     //Note that I can't simply use URI.java to encode because it will escape pre-existing escaped things.
     StringBuilder sb = null;
