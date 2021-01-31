@@ -22,4 +22,5 @@ define 'proxy-servlet' do
   package(:jar)
   package(:sources)
   package(:javadoc)
+  ipr.add_component_from_artifact(:idea_codestyle)
 end
