@@ -284,10 +284,10 @@ public abstract class AbstractProxyServlet
                                    @Nonnull final HttpRequest proxyRequest )
   {
     // Get an Enumeration of all of the header names sent by the client
-    final Enumeration enumerationOfHeaderNames = servletRequest.getHeaderNames();
+    final Enumeration<String> enumerationOfHeaderNames = servletRequest.getHeaderNames();
     while ( enumerationOfHeaderNames.hasMoreElements() )
     {
-      final String headerName = (String) enumerationOfHeaderNames.nextElement();
+      final String headerName = enumerationOfHeaderNames.nextElement();
       //Instead the content-length is effectively set via InputStreamEntity
       if ( headerName.equalsIgnoreCase( HttpHeaders.CONTENT_LENGTH ) )
       {
@@ -298,11 +298,11 @@ public abstract class AbstractProxyServlet
         continue;
       }
 
-      final Enumeration headers = servletRequest.getHeaders( headerName );
+      final Enumeration<String> headers = servletRequest.getHeaders( headerName );
       while ( headers.hasMoreElements() )
       {
         //sometimes more than one value
-        String headerValue = (String) headers.nextElement();
+        String headerValue = headers.nextElement();
         // In case the proxy host is running multiple virtual servers,
         // rewrite the Host header to ensure that we get content from
         // the correct virtual server
