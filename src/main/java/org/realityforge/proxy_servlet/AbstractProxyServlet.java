@@ -446,7 +446,7 @@ public abstract class AbstractProxyServlet
       boolean escape = true;
       if ( c < MAX_ASCII_VALUE )
       {
-        if ( ASCII_QUERY_CHARS.get( (int) c ) )
+        if ( ASCII_QUERY_CHARS.get( c ) )
         {
           escape = false;
         }
@@ -505,30 +505,30 @@ public abstract class AbstractProxyServlet
     ASCII_QUERY_CHARS = new BitSet( MAX_ASCII_VALUE );
     for ( char c = 'a'; c <= 'z'; c++ )
     {
-      ASCII_QUERY_CHARS.set( (int) c );
+      ASCII_QUERY_CHARS.set( c );
     }
     for ( char c = 'A'; c <= 'Z'; c++ )
     {
-      ASCII_QUERY_CHARS.set( (int) c );
+      ASCII_QUERY_CHARS.set( c );
     }
     for ( char c = '0'; c <= '9'; c++ )
     {
-      ASCII_QUERY_CHARS.set( (int) c );
+      ASCII_QUERY_CHARS.set( c );
     }
     for ( final char c : unreserved )
     {
-      ASCII_QUERY_CHARS.set( (int) c );
+      ASCII_QUERY_CHARS.set( c );
     }
     for ( char c : punct )
     {
-      ASCII_QUERY_CHARS.set( (int) c );
+      ASCII_QUERY_CHARS.set( c );
     }
     for ( char c : reserved )
     {
-      ASCII_QUERY_CHARS.set( (int) c );
+      ASCII_QUERY_CHARS.set( c );
     }
 
     //leave existing percent escapes in place
-    ASCII_QUERY_CHARS.set( (int) '%' );
+    ASCII_QUERY_CHARS.set( '%' );
   }
 }
