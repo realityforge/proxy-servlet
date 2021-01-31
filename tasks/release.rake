@@ -43,7 +43,7 @@ task 'perform_release' do
       next_version = ENV['PRODUCT_VERSION']
       unless next_version
         version_parts = ENV['PREVIOUS_PRODUCT_VERSION'].split('.')
-        next_version = "#{version_parts[0]}.#{sprintf('%02d', version_parts[1].to_i + 1)}#{version_parts.length > 2 ? ".#{version_parts[2]}" : ''}"
+        next_version = "#{version_parts[0]}.#{version_parts[1].to_i + 1}#{version_parts.length > 2 ? ".#{version_parts[2]}" : ''}"
         ENV['PRODUCT_VERSION'] = next_version
       end
 
