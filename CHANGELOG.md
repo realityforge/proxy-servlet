@@ -6,6 +6,7 @@
 * Upgrade the servlet-api to latest version `javax.servlet:javax.servlet-api:jar:4.0.1`
 * Annotate APIs with nullability annotations.
 * Catch a IOException that is thrown from GlassFish due to bug in GlassFish where it attempts to write to a closed connection. This avoids spurious error messages appearing in the logs.
+* Remove the `AbstractProxyServlet.rewriteUrlFromRequest(...)` method from the public API of the servlet as no downstream users override method.
 
 ### [v0.2.0](https://github.com/realityforge/proxy-servlet/tree/v0.2.0) (2013-12-28) · [Full Changelog](https://github.com/realityforge/proxy-servlet/compare/v0.1.0...v0.2.0)
 

@@ -388,7 +388,7 @@ public abstract class AbstractProxyServlet
    * Reads the request URI from {@code servletRequest} and rewrites it, considering {@link
    * #_targetUri}. It's used to make the new request.
    */
-  protected String rewriteUrlFromRequest( @Nonnull final HttpServletRequest servletRequest )
+  private String rewriteUrlFromRequest( @Nonnull final HttpServletRequest servletRequest )
   {
     final StringBuilder sb = new StringBuilder( 500 );
     sb.append( _target );
