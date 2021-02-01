@@ -188,6 +188,8 @@ public abstract class AbstractProxyServlet
 
   /**
    * Override this to customize the proxied request.
+   *
+   * @param request the request to customize.
    */
   @SuppressWarnings( "UnusedParameters" )
   protected void proxyPrepared( @Nonnull final HttpRequest request )
