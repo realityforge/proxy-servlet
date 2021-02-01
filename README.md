@@ -14,7 +14,7 @@ Download the jar from maven central. This can be done by adding a Maven dependen
 <dependency>
    <groupId>org.realityforge.proxy-servlet</groupId>
    <artifactId>proxy-servlet</artifactId>
-   <version>0.03.0</version>
+   <version>0.2.0</version>
 </dependency>
 ```
 
