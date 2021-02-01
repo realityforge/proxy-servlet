@@ -1,5 +1,7 @@
 # Change Log
 
+### Unreleased
+
 ### [v0.3.0](https://github.com/realityforge/proxy-servlet/tree/v0.3.0) (2021-02-01) · [Full Changelog](https://github.com/realityforge/proxy-servlet/compare/v0.2.0...v0.3.0)
 
 * Upgrade the minimum JVM version to 1.8.
