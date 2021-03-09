@@ -5,7 +5,7 @@ repositories:
     - https://repo.maven.apache.org/maven2
 
 artifacts:
-  idea_codestyle: au.com.stocksoftware.idea.codestyle:idea-codestyle:xml:1.14
+  idea_codestyle: au.com.stocksoftware.idea.codestyle:idea-codestyle:xml:1.17
 
   httpclient: org.apache.httpcomponents:httpclient:jar:4.3
   httpcore: org.apache.httpcomponents:httpcore:jar:4.3
