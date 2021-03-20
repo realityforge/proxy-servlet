@@ -1,6 +1,8 @@
 require 'buildr/gpg'
 require 'buildr/git_auto_version'
 
+Buildr::MavenCentral.define_publish_tasks(:profile_name => 'org.realityforge', :username => 'realityforge')
+
 HTTP_CLIENT_JARS = [:httpclient, :httpcore, :commons_codec, :commons_logging]
 
 desc "ProxyServlet: Servlet providing proxy capabilities"
