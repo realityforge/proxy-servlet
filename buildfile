@@ -10,7 +10,7 @@ define 'proxy-servlet' do
   project.group = 'org.realityforge.proxy-servlet'
   compile.options.source = '1.8'
   compile.options.target = '1.8'
-  compile.options.lint = 'all'
+  compile.options.lint = 'all,-serial'
   compile.options.warnings = true
   compile.options.other = %w(-Werror -Xmaxerrs 10000 -Xmaxwarns 10000)
 
