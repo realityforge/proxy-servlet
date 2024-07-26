@@ -14,4 +14,4 @@ artifacts:
 
   javax_servlet: javax.servlet:javax.servlet-api:jar:4.0.1
 
-  javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.1
+  javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.1.1
